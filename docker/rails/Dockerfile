@@ -3,6 +3,7 @@ FROM ruby:3
 ARG UID=1000
 ARG GID=1000
 
+RUN apt-get update && apt-get install sudo
 RUN groupadd -g $GID devel
 RUN useradd -u $UID -g devel -m devel
 RUN echo "devel ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
@@ -29,3 +30,4 @@ CMD ["rails", "server", "-b", "0.0.0.0"]
 
 USER devel
 WORKDIR /apps
+RUN bundle install
