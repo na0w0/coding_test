@@ -1,0 +1,12 @@
+<div>
+    <% @user_id = current_user.id %>
+    <%= f.hidden_field :user_id, required: true %>
+</div>
+<div>
+    <%= f.label :title, 'タイトル', class: 'required' %>
+    <%= f.text_field :title, required: true %>
+</div>
+<div>
+    <%= f.label :text, 'テキスト', class: 'required' %>
+    <%= f.text_field :text, required: true %>
+</div>

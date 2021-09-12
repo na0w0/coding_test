@@ -1,0 +1,21 @@
+<% @title = '投稿記事一覧' %>
+<h1><%= @title %></h1>
+<div>
+    <table>
+        <tr>
+            <th>作成日</th>
+            <th>タイトル</th>
+            <th>作成者</th>
+        </tr>
+        <% @articles.each do |a| %>
+            <tr>
+                <td><%= a.created_at.strftime('%Y/%m/%d') %></td>
+                <td><%= a.title %></td>
+                <td><%= a.user.id %></td>
+                <td class="actions">
+                <%= link_to '編集', [ :edit, a ]%> |
+                </td>
+            </tr>
+        <% end %>
+    </table>
+</div>
