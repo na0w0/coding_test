@@ -3,10 +3,11 @@
   <p class="notice"><%= notice %></p>
   <p class="alert"><%= alert %></p>
   <%=
-    # if current_user
-    #   link_to 'ログアウト', :user_session, method: :delete
-    # else
-    #   link_to 'ログイン', :user_login
-    # end
+    if current_user
+      link_to 'ログアウト', :destroy_user_session, method: :delete
+    else
+      link_to 'ログイン', :user_session
+    end
   %>
+  <%= link_to '新規登録', :new_user_registration %>
 </header>
