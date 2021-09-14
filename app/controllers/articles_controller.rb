@@ -1,8 +1,14 @@
 class ArticlesController < ApplicationController
-  before_action :authenticate_user!, expect: [ :show ]
+  before_action :authenticate_user!, except: [ :index, :show ]
 
   def index
-    @articles = Article.where(user_id: current_user.id)
+    if current_user
+      @user_id = current_user.id
+    else
+      @user_id = params[:user_id]
+    end
+
+    @articles = Article.where(user_id: @user_id)
   end
 
   def new 
@@ -11,21 +17,16 @@ class ArticlesController < ApplicationController
 
   def create
     @article = Article.new(article_params)
-    logger.debug('--- article ---')
-    logger.debug(@article.user_id)
-    logger.debug(@article.title)
-    logger.debug(@article.text)
-    logger.debug('---------------')
     if @article.save
       flash.notice = '記事を作成しました。'
-      # redirect_to :
+      redirect_to :articles
     else
       render action: 'new'
     end
   end
 
   def show
-    redirect_to [ :edit, current_user ]
+    @article = Article::find(params[:id])
   end
 
   def edit

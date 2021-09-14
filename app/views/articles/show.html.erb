@@ -1,0 +1,10 @@
+<% @title = @article.title %>
+<h1><%= @title %></h1>
+
+<div>
+    <%= form_with model: @article do |f| %>
+    <div>
+    <%= @article.text %>
+    </div>
+    <% end %>
+</div>
