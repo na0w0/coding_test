@@ -2,12 +2,7 @@ class ArticlesController < ApplicationController
   before_action :authenticate_user!, except: [ :index, :show ]
 
   def index
-    if current_user
-      @user_id = current_user.id
-    else
-      @user_id = params[:user_id]
-    end
-
+    @user_id = params[:user_id]
     @articles = Article.where(user_id: @user_id)
   end
 
