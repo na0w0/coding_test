@@ -7,5 +7,6 @@ Rails.application.routes.draw do
     resources :articles, only: :index
   end
 
+  get 'mypage', to: 'articles#index'
   resources :articles
 end
