@@ -14,7 +14,7 @@ class ArticlesController < ApplicationController
     @article = Article.new(article_params)
     if @article.save
       flash.notice = '記事を作成しました。'
-      redirect_to :articles
+      redirect_to :mypage_index
     else
       render action: 'new'
     end
@@ -28,7 +28,21 @@ class ArticlesController < ApplicationController
     @article = Article::find(params[:id])
   end
 
+  def update
+    @article = Article::find(params[:id])
+    if @article.update(article_params)
+      flash.notice = '記事を更新しました。'
+      redirect_to :mypage_index
+    else
+      render action: :edit
+    end
+  end
+
   def destroy
+    @article = Article::find(params[:id])
+    @article.destroy!
+    flash.notice = '記事を削除しました。'
+    redirect_to :mypage_index
   end
 
   private

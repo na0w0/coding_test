@@ -8,5 +8,6 @@ Rails.application.routes.draw do
 
   # ログインユーザーの記事一覧
   # TODO: to: 'users#show'かindexにする
-  get 'mypage', to: 'articles#index'
+  # get 'mypage', to: 'articles#index'
+  resources :mypage, only: 'index'
 end
