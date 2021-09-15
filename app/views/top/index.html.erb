@@ -2,7 +2,7 @@
 <h1><%= @title %></h1>
 <h2>新着ブログ一覧</h2>
 <% if current_user %>
-    <%= link_to '記事を作成する', :new_article %>
+    <%= link_to '記事を作成する', new_user_article_url(current_user.id) %>
 <% end %>
 <div>
     <table>

@@ -1,5 +1,5 @@
 <div>
-    <% @user_id = current_user.id %>
+    <% @user_id = @article.user_id %>
     <%= f.hidden_field :user_id, required: true %>
 </div>
 <div>

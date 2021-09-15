@@ -9,10 +9,10 @@
         <% @articles.each do |a| %>
             <tr>
                 <td><%= a.created_at.strftime('%Y/%m/%d') %></td>
-                <td><%= link_to a.title, user_article_path(id: a) %></td>
+                <td><%= link_to a.title, user_article_path(user_id: a.user_id, id: a) %></td>
                 <% if current_user %>
                 <td class="actions">
-                <%= link_to '編集', [ :edit, a ]%> |
+                <%= link_to '編集', edit_user_article_path(user_id: a.user_id, id: a) %>
                 <% end %>
                 </td>
             </tr>
