@@ -6,7 +6,9 @@ Rails.application.routes.draw do
   }
 
   resources :users, only: [] do
-    resources :posts
+    resources :posts do
+      resources :comments, only: [:create]
+    end
   end
 
   # ログインユーザーの記事一覧
