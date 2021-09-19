@@ -1,0 +1,16 @@
+<div>
+    <% if posts.present? %>
+    <table>
+        <tr>
+            <th>作成日</th>
+            <th>タイトル</th>
+            <th>作成者</th>
+        </tr>
+        <%= yield :lists %>
+    </table>
+    <% else %>
+    <tr>
+        <td>記事がありません</td>
+    </tr>
+    <% end %>
+</div>

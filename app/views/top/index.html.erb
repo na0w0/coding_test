@@ -1,29 +1,18 @@
 <% @title='ブログトップページ' %>
 <h1><%= @title %></h1>
 <h2>新着ブログ一覧</h2>
+
 <% if current_user %>
     <%= link_to '記事を作成する', new_user_post_url(current_user.id) %>
 <% end %>
-<div>
-    <% if @posts.nil? %>
-    <table>
-        <tr>
-            <th>作成日</th>
-            <th>タイトル</th>
-            <th>作成者</th>
-        </tr>
 
-        <% @posts.each do |post| %>
-            <tr>
-                <td><%= post.created_at.strftime('%Y/%m/%d') %></td>
-                <td><%= link_to post.title, user_post_path(id: post, user_id: post.user.id) %></td>
-                <td><%= link_to post.user.id, user_posts_path(user_id: post.user.id) %></td>
-            </tr>
-        <% end %>
-    </table>
-    <% else %>
-    <tr>
-        <td>記事がありません</td>
-    </tr>
+<%= content_for :lists do %>
+    <% @posts.each do |post| %>
+        <tr>
+            <td><%= post.created_at.strftime('%Y/%m/%d') %></td>
+            <td><%= link_to post.title, user_post_path(id: post, user_id: post.user.id) %></td>
+            <td><%= link_to post.user.id, user_posts_path(user_id: post.user.id) %></td>
+        </tr>
     <% end %>
-</div>
+<% end %>
+<%= render 'shared/post_lists', posts: @posts %>
