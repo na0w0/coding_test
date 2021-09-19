@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   }
 
   resources :users, only: [] do
-    resources :articles
+    resources :posts
   end
 
   # ログインユーザーの記事一覧

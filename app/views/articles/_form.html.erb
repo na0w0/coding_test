@@ -1,5 +1,5 @@
 <div>
-    <% @user_id = @article.user_id %>
+    <% @user_id = @post.user_id %>
     <%= f.hidden_field :user_id, required: true %>
 </div>
 <div>
@@ -7,6 +7,6 @@
     <%= f.text_field :title, required: true %>
 </div>
 <div>
-    <%= f.label :text, 'テキスト', class: 'required' %>
-    <%= f.text_field :text, required: true %>
+    <%= f.label :content, 'テキスト', class: 'required' %>
+    <%= f.text_field :content, required: true %>
 </div>

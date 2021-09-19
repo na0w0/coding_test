@@ -2,10 +2,10 @@
 <h1><%= @title %></h1>
 <h2>新着ブログ一覧</h2>
 <% if current_user %>
-    <%= link_to '記事を作成する', new_user_article_url(current_user.id) %>
+    <%= link_to '記事を作成する', new_user_post_url(current_user.id) %>
 <% end %>
 <div>
-    <% if @articles.nil? %>
+    <% if @posts.nil? %>
     <table>
         <tr>
             <th>作成日</th>
@@ -13,11 +13,11 @@
             <th>作成者</th>
         </tr>
 
-        <% @articles.each do |article| %>
+        <% @posts.each do |post| %>
             <tr>
-                <td><%= article.created_at.strftime('%Y/%m/%d') %></td>
-                <td><%= link_to article.title, user_article_path(id: article, user_id: article.user.id) %></td>
-                <td><%= link_to article.user.id, user_articles_path(user_id: article.user.id) %></td>
+                <td><%= post.created_at.strftime('%Y/%m/%d') %></td>
+                <td><%= link_to post.title, user_post_path(id: post, user_id: post.user.id) %></td>
+                <td><%= link_to post.user.id, user_posts_path(user_id: post.user.id) %></td>
             </tr>
         <% end %>
     </table>
