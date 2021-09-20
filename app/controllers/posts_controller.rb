@@ -21,17 +21,17 @@ class PostsController < ApplicationController
   end
 
   def show
-    @post = Post::find(params[:id])
+    @post = Post.find(params[:id])
     @comments = @post.comments
     @comment = Comment.new
   end
 
   def edit
-    @post = Post::find(params[:id])
+    @post = Post.find(params[:id])
   end
 
   def update
-    @post = Post::find(params[:id])
+    @post = Post.find(params[:id])
     if @post.update(post_params)
       flash.notice = '記事を更新しました。'
       redirect_to :mypage_index
@@ -41,7 +41,7 @@ class PostsController < ApplicationController
   end
 
   def destroy
-    @post = Post::find(params[:id])
+    @post = Post.find(params[:id])
     @post.destroy!
     flash.notice = '記事を削除しました。'
     redirect_to :mypage_index

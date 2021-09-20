@@ -18,8 +18,12 @@
         <tr>
         <td><%= comment.user.name %></td>
         <td><%= comment.content %></td>
+        <td><%= link_to '編集', edit_post_comment_path(id: comment, post_id: @post.id) %></td>
+        <td><%= link_to '削除', post_comment_path(id: comment, post_id: @post.id), method: :delete, data: { confirm: 'コメントを削除しますか？' } %></td>
         </tr>
         <% end %>
+    </tbody>
+</table>
 
 <%= form_with model: [@post, @comment] do |f| %>
 <%= f.text_field :content %>

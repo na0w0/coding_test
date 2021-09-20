@@ -1,0 +1,9 @@
+<% @title = 'コメントの編集' %>
+<h1><%= @title %></h1>
+
+<div>
+<%= form_with model: [@post, @comment] do |f| %>
+<%= f.text_field :content %>
+<%= f.submit 'コメントを更新する。' %>
+<% end %>
+</div>
