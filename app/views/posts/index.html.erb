@@ -6,15 +6,10 @@
             <th>作成日</th>
             <th>タイトル</th>
         </tr>
-        <% @posts.each do |a| %>
+        <% @posts.each do |post| %>
             <tr>
-                <td><%= a.created_at.strftime('%Y/%m/%d') %></td>
-                <td><%= link_to a.title, user_post_path(user_id: a.user_id, id: a) %></td>
-                <% if current_user %>
-                <td class="actions">
-                <%= link_to '編集', edit_user_post_path(user_id: a.user_id, id: a) %>
-                <% end %>
-                </td>
+                <td><%= post.created_at.strftime('%Y/%m/%d') %></td>
+                <td><%= link_to post.title, post_path(post) %></td>
             </tr>
         <% end %>
     </table>

@@ -1,15 +1,14 @@
 <% @title = "投稿記事一覧" %>
 <h1><%= @title %></h1>
-<%= link_to '記事を作成する', new_user_post_path(current_user.id) %>
+<%= link_to '記事を作成する', :new_post %>
 
 <%= content_for :lists do %>
     <% @posts.each do |post| %>
         <tr>
             <td><%= post.created_at.strftime('%Y/%m/%d') %></td>
-            <td><%= link_to post.title, user_post_path(id: post, user_id: post.user.id) %></td>
-            <td><%= link_to post.user.id, user_posts_path(user_id: post.user.id) %></td>
-            <td><%= link_to '編集', edit_user_post_path(user_id: post.user_id, id: post) %></td>
-            <td><%= link_to '削除', user_post_path(user_id: post.user_id, id: post), method: :delete, data: { confirm: '記事を削除しますか？' } %></td>
+            <td><%= link_to post.title, post_path(post) %></td>
+            <td><%= link_to '編集', edit_post_path(post) %></td>
+            <td><%= link_to '削除', post_path(post), method: :delete, data: { confirm: '記事を削除しますか？' } %></td>
         </tr>
     <% end %>
 <% end %>

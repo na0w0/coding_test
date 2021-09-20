@@ -3,7 +3,7 @@
 <h2>新着ブログ一覧</h2>
 
 <% if current_user %>
-    <%= link_to '記事を作成する', new_user_post_url(current_user.id) %>
+    <%= link_to '記事を作成する', :new_post %>
 <% end %>
 
 <%= content_for :lists do %>
@@ -11,7 +11,11 @@
         <tr>
             <td><%= post.created_at.strftime('%Y/%m/%d') %></td>
             <td><%= link_to post.title, user_post_path(id: post, user_id: post.user.id) %></td>
+            <% if user_signed_in? && current_user.id == post.user.id %>
+            <td><%= link_to post.user.id, :mypage_index %></td>
+            <% else %>
             <td><%= link_to post.user.id, user_posts_path(user_id: post.user.id) %></td>
+            <% end %>
         </tr>
     <% end %>
 <% end %>
