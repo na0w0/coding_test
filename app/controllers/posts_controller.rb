@@ -13,8 +13,7 @@ class PostsController < ApplicationController
   def create
     @post = Post.new(post_params)
     if @post.save
-      flash.notice = '記事を作成しました。'
-      redirect_to :mypage_index
+      redirect_to :mypage_index, success: '記事を作成しました。'
     else
       render action: 'new'
     end
@@ -33,8 +32,7 @@ class PostsController < ApplicationController
   def update
     @post = Post.find(params[:id])
     if @post.update(post_params)
-      flash.notice = '記事を更新しました。'
-      redirect_to :mypage_index
+      redirect_to :mypage_index, success: '記事を更新しました。'
     else
       render action: :edit
     end
@@ -43,8 +41,7 @@ class PostsController < ApplicationController
   def destroy
     @post = Post.find(params[:id])
     @post.destroy!
-    flash.notice = '記事を削除しました。'
-    redirect_to :mypage_index
+    redirect_to :mypage_index, success: '記事を削除しました。'
   end
 
   private
