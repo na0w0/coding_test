@@ -1,3 +1,8 @@
-// Place all the styles related to the top controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: https://sass-lang.com/
+ul.post-user {
+  display: flex;
+  list-style: none;
+  justify-content: flex-end;
+  margin-bottom: 0;
+  position: relative;
+  top: 10px;
+}

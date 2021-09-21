@@ -1,13 +1,8 @@
-<div>
+<div class='row'>
     <% if posts.present? %>
-    <table>
-        <tr>
-            <th>作成日</th>
-            <th>タイトル</th>
-            <th>作成者</th>
-        </tr>
+    <div class='row mb-2'>
         <%= yield :lists %>
-    </table>
+    </div>
     <% else %>
     <tr>
         <td>記事がありません</td>

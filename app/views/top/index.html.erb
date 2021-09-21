@@ -1,22 +1,35 @@
 <% @title='ブログトップページ' %>
 <h1><%= @title %></h1>
-<h2>新着ブログ一覧</h2>
 
 <% if current_user %>
-    <%= link_to '記事を作成する', :new_post %>
+    <%= link_to '記事を作成する', :new_post, class: 'btn btn-sm btn-outline-secondary' %>
 <% end %>
 
+<h2>新着ブログ一覧</h2>
 <%= content_for :lists do %>
     <% @posts.each do |post| %>
-        <tr>
-            <td><%= post.created_at.strftime('%Y/%m/%d') %></td>
-            <td><%= link_to post.title, user_post_path(id: post, user_id: post.user.id) %></td>
-            <% if user_signed_in? && current_user.id == post.user.id %>
-            <td><%= link_to post.user.id, :mypage_index %></td>
-            <% else %>
-            <td><%= link_to post.user.id, user_posts_path(user_id: post.user.id) %></td>
-            <% end %>
-        </tr>
+        <div class='col-md6'>
+            <div class='row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative'>
+                <div class='col p-4 d-flex flex-column position-static'>
+                    <h3 class='mb-0'><%= link_to post.title, user_post_path(id: post, user_id: post.user.id) %></h3>
+                    <div class='mb-1 text-muted'><%= post.created_at.strftime('%Y/%m/%d') %></div>
+                    <ul class='post-user'>
+                        <li>
+                            <span>投稿者：</span>
+                        </li>
+                        <% if user_signed_in? && current_user.id == post.user.id %>
+                            <li>
+                                <%= link_to post.user.name, :mypage_index %>
+                            </li>
+                        <% else %>
+                            <li>
+                                <%= link_to post.user.name, user_posts_path(user_id: post.user.id) %>
+                            </li>
+                        <% end %>
+                    </ul>
+                </div>
+            </div>
+        </div>
     <% end %>
 <% end %>
 <%= render 'shared/post_lists', posts: @posts %>
