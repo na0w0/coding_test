@@ -1,21 +1,20 @@
 <!DOCTYPE html>
-<html>
+<html style='min-height: 100%;'>
   <head>
     <title><%= document_title %></title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>  
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
-    <div id='wrapper'>
-      <%= render 'shared/header' %>
-      <div id='container'>
-        <%= yield %>
-      </div>
-      <%= render 'shared/footer' %>
+    <%= render 'shared/header' %>
+    <div class='container'>  
+      <%= yield %>
     </div>
+    <%= render 'shared/footer' %>
   </body>
 </html>
