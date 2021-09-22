@@ -1,24 +1,42 @@
-# README
+## コーディングテスト課題
+### 題材
+- ブログ
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+### 使用した技術スタック
+- Rails:  6.1.4.1
+- Ruby:   3.0.2p107
 
-Things you may want to cover:
+### Gem
+- dotenv-rails
+- devise
+- devise-i18n
+- devise-i18n-views
 
-* Ruby version
+### yarn
+- bootstrap5
+- jquery3:
+- popper.js
 
-* System dependencies
+### 開発環境
+- docker
+- docker-compose
 
-* Configuration
+### 開発環境構築手順
+```
+# コンテナをビルド
+docker-compose build
 
-* Database creation
+# bundle installを実行
+docker-compose run api bundle install
 
-* Database initialization
+# データベースを作成
+docker-compose run api rails db:create
 
-* How to run the test suite
+# マイグレーションを実行
+docker-compose run api rails db:migrate
 
-* Services (job queues, cache servers, search engines, etc.)
+# コンテナをバックグラウンドで起動
+docker-compose up -d
 
-* Deployment instructions
-
-* ...
+http://localhost:3000 にアクセス
+```
