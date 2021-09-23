@@ -1,31 +1,59 @@
-<% @title = @post.title %>
-<h1><%= @title %></h1>
+<div class='row py-4'>
+    <div class='col'>
+        <% @title = @post.title %>
+        <h1><%= @title %></h1>
 
-<div>
-<%= @post.content %>
+        <p class='blog-post-meta'>
+            <%= "投稿日：#{@post.created_at.strftime('%Y/%m/%d')} by" %>
+            <% if user_signed_in? && current_user.id == @post.user.id %>
+                <%= link_to @post.user.name, :mypage_index %>
+            <% else %>
+                <%= link_to @post.user.name, user_posts_path(user_id: @post.user.id) %>
+            <% end %>
+        </p>
+
+        <article>
+            <%= @post.content %>
+        </article>
+    </div>
 </div>
 
-<h2>コメント</h2>
-<table>
-    <thead>
-        <tr>
-        <th>投稿者名</th>
-        <th>コメント</th>
-        </tr>
-    </thead>
-    <tbody>
-        <% @comments.each do |comment| %>
-        <tr>
-        <td><%= comment.user.name %></td>
-        <td><%= comment.content %></td>
-        <td><%= link_to '編集', edit_post_comment_path(id: comment, post_id: @post.id) %></td>
-        <td><%= link_to '削除', post_comment_path(id: comment, post_id: @post.id), method: :delete, data: { confirm: 'コメントを削除しますか？' } %></td>
-        </tr>
-        <% end %>
-    </tbody>
-</table>
-
-<%= form_with model: [@post, @comment] do |f| %>
-<%= f.text_field :content %>
-<%= f.submit 'コメントする' %>
-<% end %>
+<div class='row'>
+    <h2>コメント</h2>
+    <% @comments.each do |comment| %>
+        <div class='card py-2 my-1'>
+            <p class='card-text'>
+                <%= comment.content %>
+            </p>
+            <div class='d-flex justify-content-between align-items-center'>
+                <p>
+                    <%= "#{comment.created_at.strftime('%Y/%m/%d')} by" %>
+                    <% if user_signed_in? && current_user.id == comment.user.id %>
+                        <%= link_to comment.user.name, :mypage_index %>
+                    <% else %>
+                        <%= link_to comment.user.name, user_posts_path(user_id: comment.user.id) %>
+                    <% end %>
+                </p>
+                <div class='btn-group'>
+                    <%= link_to '編集', edit_post_comment_path(id: comment, post_id: @post.id), class: 'btn btn-sm btn-outline-primary' %>
+                    <%= link_to '削除', post_comment_path(id: comment, post_id: @post.id), method: :delete, data: { confirm: 'コメントを削除しますか？' }, class: 'btn btn-sm btn-outline-danger' %>
+                </div>
+            </div>
+        </div>
+    <% end %>
+    <div class='card py-2 my-1'>
+    <%= form_with model: [@post, @comment] do |f| %>
+        <div class="card-body">
+            <label for="inputComment" class="col-sm-2 col-form-label">コメント</label>
+            <div class='row'>
+                <div class="col">
+                    <%= f.text_field :content, class: 'form-control', id: 'inputComment' %>
+                </div>
+                <div class='col-2'>
+                    <%= f.submit 'コメントする', class: 'btn btn-primary' %>
+                </div>
+            </div>
+        </div>
+    <% end %>
+</div>
+</div>
