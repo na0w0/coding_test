@@ -21,20 +21,14 @@
                 <div class='col p-4 d-flex flex-column position-static'>
                     <h3 class='mb-0'><%= link_to post.title, user_post_path(id: post, user_id: post.user.id) %></h3>
                     <div class='mb-1 text-muted'><%= post.created_at.strftime('%Y/%m/%d') %></div>
-                    <ul class='post-user'>
-                        <li>
-                            <span>投稿者：</span>
-                        </li>
+                    <p class='post-user'>
+                        投稿者：
                         <% if user_signed_in? && current_user.id == post.user.id %>
-                            <li>
-                                <%= link_to post.user.name, :mypage_index %>
-                            </li>
+                            <%= link_to post.user.name, :mypage_index %>
                         <% else %>
-                            <li>
-                                <%= link_to post.user.name, user_posts_path(user_id: post.user.id) %>
-                            </li>
+                            <%= link_to post.user.name, user_posts_path(user_id: post.user.id) %>
                         <% end %>
-                    </ul>
+                    </p>
                 </div>
             </div>
         </div>
