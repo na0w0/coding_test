@@ -3,7 +3,7 @@
 
 <div>
 <%= form_with model: [@post, @comment] do |f| %>
-<%= f.text_field :content %>
+<%= f.text_field :content, required: true %>
 <%= f.submit 'コメントを更新する。' %>
 <% end %>
 </div>
