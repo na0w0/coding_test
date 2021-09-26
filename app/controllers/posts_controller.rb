@@ -2,8 +2,8 @@ class PostsController < ApplicationController
   before_action :authenticate_user!, except: [ :index, :show ]
 
   def index
-    @user_id = params[:user_id]
-    @posts = Post.where(user_id: @user_id)
+    @user = User.find(params[:user_id])
+    @posts = Post.where(user_id: @user.id)
   end
 
   def new 
