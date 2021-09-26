@@ -2,8 +2,8 @@
 <h1><%= @title %></h1>
 
 <div>
-<%= form_with model: [@post, @comment] do |f| %>
-<%= f.text_field :content, required: true %>
-<%= f.submit 'コメントを更新する。' %>
-<% end %>
+  <%= form_with model: [@post, @comment] do |f| %>
+    <%= f.text_field :content, required: true %>
+    <%= f.submit 'コメントを更新する。' %>
+  <% end %>
 </div>

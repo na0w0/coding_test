@@ -1,50 +1,50 @@
 <% @title = "投稿記事一覧" %>
 <div class='row p-4'>
-    <div class='col-6'>
-        <h1><%= @title %></h1>
-    </div>
-    <div class='col-6 py-4'>
-        <% if current_user %>
-            <%= link_to '記事を作成する', :new_post, class: 'btn btn-sm btn-outline-success float-end'%>
-            <%= link_to '退会する', :user_registration, class: 'btn btn-sm btn-outline-danger float-end', method: :delete, data: { confirm: '本当に退会されますか？（関連するデータは削除されます。）' }  %>
-        <% end %>
-    </div>
+  <div class='col-6'>
+    <h1><%= @title %></h1>
+  </div>
+  <div class='col-6 py-4'>
+    <% if current_user %>
+      <%= link_to '記事を作成する', :new_post, class: 'btn btn-sm btn-outline-success float-end'%>
+      <%= link_to '退会する', :user_registration, class: 'btn btn-sm btn-outline-danger float-end', method: :delete, data: { confirm: '本当に退会されますか？（関連するデータは削除されます。）' }  %>
+    <% end %>
+  </div>
 </div>
 
 <%= content_for :lists do %>
-    <% @posts.each do |post| %>
-        <div class='col-md6'>
-            <div class='row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative'>
-                <div class='col-10 p-4 d-flex flex-column position-static'>
-                    <h3 class='mb-0'><%= link_to post.title, user_post_path(id: post, user_id: post.user.id) %></h3>
-                    <div class='mb-1 text-muted'><%= post.created_at.strftime('%Y/%m/%d') %></div>
-                </div>
-                <div class='col p-4'>
-                    <div class='row px-4 p-2'>
-                        <%= link_to '編集', edit_post_path(post), class: 'btn btn-sm btn-outline-primary' %>
-                    </div>
-                    <div class='row px-4'>
-                        <%= link_to '削除', post_path(post), method: :delete, data: { confirm: '記事を削除しますか？' }, class: 'btn btn-sm btn-outline-danger' %>
-                    </div>
-                    <div class='row px-2'>
-                        <ul class='post-user'>
-                            <li>
-                                <span>投稿者：</span>
-                            </li>
-                            <% if user_signed_in? && current_user.id == post.user.id %>
-                            <li>
-                                <%= link_to post.user.name, :mypage_index %>
-                            </li>
-                            <% else %>
-                            <li>
-                                <%= link_to post.user.name, user_posts_path(user_id: post.user.id) %>
-                            </li>
-                            <% end %>
-                        </ul>
-                    </div>
-                </div>
-            </div>
+  <% @posts.each do |post| %>
+    <div class='col-md6'>
+      <div class='row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative'>
+        <div class='col-10 p-4 d-flex flex-column position-static'>
+          <h3 class='mb-0'><%= link_to post.title, user_post_path(id: post, user_id: post.user.id) %></h3>
+          <div class='mb-1 text-muted'><%= post.created_at.strftime('%Y/%m/%d') %></div>
         </div>
-    <% end %>
+        <div class='col p-4'>
+          <div class='row px-4 p-2'>
+            <%= link_to '編集', edit_post_path(post), class: 'btn btn-sm btn-outline-primary' %>
+          </div>
+          <div class='row px-4'>
+            <%= link_to '削除', post_path(post), method: :delete, data: { confirm: '記事を削除しますか？' }, class: 'btn btn-sm btn-outline-danger' %>
+          </div>
+          <div class='row px-2'>
+            <ul class='post-user'>
+              <li>
+                <span>投稿者：</span>
+              </li>
+              <% if user_signed_in? && current_user.id == post.user.id %>
+              <li>
+                <%= link_to post.user.name, :mypage_index %>
+              </li>
+              <% else %>
+              <li>
+                <%= link_to post.user.name, user_posts_path(user_id: post.user.id) %>
+              </li>
+              <% end %>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
 <% end %>
 <%= render 'shared/post_lists', posts: @posts %>
