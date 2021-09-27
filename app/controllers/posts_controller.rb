@@ -3,6 +3,8 @@ class PostsController < ApplicationController
 
   def index
     @user = User.find(params[:user_id])
+    redirect_to :mypage_index if user_signed_in? && current_user.id == @user.id
+
     @posts = Post.where(user_id: @user.id)
   end
 
