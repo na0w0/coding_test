@@ -1,8 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe 'Mypage', type: :request do
-  describe "GET /mypage" do
-    describe 'ユーザーがログインしている場合' do
+  describe "GET #index" do
+    context 'ユーザーがログインしている場合' do
       let!(:user) { create(:user) }
 
       before do
@@ -15,7 +15,7 @@ RSpec.describe 'Mypage', type: :request do
       end
     end
 
-    describe 'ユーザーがログインしていない場合' do
+    context 'ユーザーがログインしていない場合' do
       it 'ステータスコード302が返ってくること' do
         get mypage_index_path
         expect(response).to have_http_status(302)
