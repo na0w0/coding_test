@@ -130,6 +130,7 @@ RSpec.describe 'Posts', type: :request do
       before do
         login_as user
       end
+
       it 'リクエストが成功すること' do
         post_params[:title] = 'sample'
         put post_path(id: new_post.id, post: post_params)
@@ -143,7 +144,8 @@ RSpec.describe 'Posts', type: :request do
           post_params[:title] = 'sample'
           put post_path(id: new_post.id, post: post_params)
           expect(response).to redirect_to new_user_session_path
-        end  
+        end
+
         it 'editテンプレートで表示されること' do
           post_params[:title] = 'sample'
           put post_path(id: new_post.id, post: post_params)
@@ -153,17 +155,22 @@ RSpec.describe 'Posts', type: :request do
     end
   end
 
-  # describe "DELETE #destroy" do
-  #   describe 'ログインユーザーの場合' do
-  #     before do
-  #       login_as user
-  #     end
+  describe "DELETE #destroy" do
+    describe 'ログインユーザーの場合' do
+      before do
+        login_as user
+      end
 
+      it 'リクエストが成功すること' do
+        delete post_path(id: new_post.id)
+        expect(response).to have_http_status(302)
+      end
 
-  #   end
-
-  #   describe 'ユーザーがログインしていない場合' do
-
-  #   end
-  # end
+      it '記事が削除されること' do
+        expect do
+          delete post_path(id: new_post.id)
+        end.to change(Post, :count).by(-1)
+      end
+    end
+  end
 end
