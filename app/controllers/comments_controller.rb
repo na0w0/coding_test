@@ -1,4 +1,5 @@
 class CommentsController < ApplicationController
+    before_action :authenticate_user!
     def create
         @post = Post.find(params[:post_id])
         @comment = @post.comments.new(comment_params)
@@ -19,7 +20,7 @@ class CommentsController < ApplicationController
         @post = Post.find(params[:post_id])
         @comment = Comment.find(params[:id])
         if @comment.update(comment_params)
-            redirect_to post_path(@post), success: 'コメントを更新しました。'
+            redirect_to user_post_path(@post), success: 'コメントを更新しました。'
         else
             redirect_back(fallback_location: root_path, danger: 'コメントの更新に失敗しました。')
         end
