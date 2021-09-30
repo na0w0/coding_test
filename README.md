@@ -5,16 +5,21 @@
 ### 使用した技術スタック
 - Rails:  6.1.4.1
 - Ruby:   3.0.2p107
+- MySQL:  8.2.6
 
 ### Gem
 - dotenv-rails
 - devise
 - devise-i18n
 - devise-i18n-views
+- rspec-rails
+- factory_bot_rails
+- faker
+- rexml
 
 ### yarn
 - bootstrap5
-- jquery3:
+- jquery3
 - popper.js
 
 ### 開発環境
