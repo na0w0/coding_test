@@ -32,16 +32,21 @@
 docker-compose build
 
 # bundle installを実行
-docker-compose run api bundle install
+docker-compose run web bundle install
+
+# yarn installを実行
+docker-compose run web yarn install
 
 # データベースを作成
-docker-compose run api rails db:create
+docker-compose run web rails db:create
 
 # マイグレーションを実行
-docker-compose run api rails db:migrate
+docker-compose run web rails db:migrate
 
 # コンテナをバックグラウンドで起動
 docker-compose up -d
 
 http://localhost:3000 にアクセス
+
+# コンテナ起動中はdocker-compose exec web を利用する
 ```
