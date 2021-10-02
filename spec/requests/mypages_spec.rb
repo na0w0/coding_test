@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe 'Mypage', type: :request do
-  describe "GET #index" do
+  describe 'GET #index' do
     context 'ユーザーがログインしている場合' do
       let!(:user) { create(:user) }
 
