@@ -6,7 +6,7 @@ RSpec.describe 'Comments', type: :request do
   let!(:new_post) { create(:post, user_id: user.id) }
   let!(:new_comment) { create(:comment, post_id: new_post.id, user_id: user.id)}
   let!(:comment_params) { attributes_for(:comment, post_id: new_post.id, user_id: user.id) }
-  describe "POST #create" do
+  describe 'POST #create' do
     context 'ログインユーザーの場合' do
       before do
         login_as user
@@ -19,7 +19,7 @@ RSpec.describe 'Comments', type: :request do
     end
   end
 
-  describe "GET #edit" do
+  describe 'GET #edit' do
     context 'ログインユーザーの場合' do
       before do
         login_as user
@@ -39,7 +39,7 @@ RSpec.describe 'Comments', type: :request do
     end
   end
 
-  describe "PUT #update" do
+  describe 'PUT #update' do
     context 'ログインユーザーの場合' do
       before do
         login_as user
@@ -70,7 +70,7 @@ RSpec.describe 'Comments', type: :request do
     end
   end
 
-  describe "DELETE #destroy" do
+  describe 'DELETE #destroy' do
     context 'ログインユーザーの場合' do
       before do
         login_as user

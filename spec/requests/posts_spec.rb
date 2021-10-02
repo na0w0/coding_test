@@ -6,7 +6,7 @@ RSpec.describe 'Posts', type: :request do
   let!(:new_post) { create(:post, user_id: user.id) }
   let!(:post_params) { attributes_for(:post, user_id: user.id) }
 
-  describe "GET #index" do
+  describe 'GET #index' do
     context 'ログインユーザーの場合' do
       before do
         login_as user
@@ -41,7 +41,7 @@ RSpec.describe 'Posts', type: :request do
     end
   end
 
-  describe "GET #new" do
+  describe 'GET #new' do
     context 'ログインユーザーの場合' do
       before do
         login_as user
@@ -60,7 +60,7 @@ RSpec.describe 'Posts', type: :request do
     end
   end
 
-  describe "POST #create" do
+  describe 'POST #create' do
     context 'ログインユーザーの場合' do
       before do
         login_as user
@@ -86,7 +86,7 @@ RSpec.describe 'Posts', type: :request do
     end
   end
 
-  describe "GET #show" do
+  describe 'GET #show' do
     context 'ログインユーザーの場合' do
       before do
         login_as user
@@ -106,7 +106,7 @@ RSpec.describe 'Posts', type: :request do
     end
   end
 
-  describe "GET #edit" do
+  describe 'GET #edit' do
     context 'ログインユーザーの場合' do
       before do
         login_as user
@@ -125,7 +125,7 @@ RSpec.describe 'Posts', type: :request do
     end
   end
 
-  describe "PUT #update" do
+  describe 'PUT #update' do
     context 'ログインユーザーの場合' do
       before do
         login_as user
@@ -155,7 +155,7 @@ RSpec.describe 'Posts', type: :request do
     end
   end
 
-  describe "DELETE #destroy" do
+  describe 'DELETE #destroy' do
     describe 'ログインユーザーの場合' do
       before do
         login_as user
