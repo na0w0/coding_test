@@ -16,11 +16,17 @@
 - factory_bot_rails
 - faker
 - rexml
+- rubocop
+- rubocop-rails
+- rubocop-rspec
+- htmlbeautifier
 
 ### yarn
 - bootstrap5
 - jquery3
 - popper.js
+- prettier
+- prettier/plugin-ruby
 
 ### 開発環境
 - docker
@@ -28,17 +34,17 @@
 
 ### 開発環境構築手順
 ```
+# .envファイルをコピー
+cp .env.sample .env
+
 # コンテナをビルド
 docker-compose build
 
 # bundle installを実行
 docker-compose run web bundle install
 
-# yarn installを実行
-docker-compose run web yarn install
-
-# データベースを作成
-docker-compose run web rails db:create
+# webpack installを実行
+docker-compose run web webpacker:install
 
 # マイグレーションを実行
 docker-compose run web rails db:migrate
