@@ -21,6 +21,8 @@
 - bootstrap5
 - jquery3
 - popper.js
+- prettier
+- prettier/plugin-ruby
 
 ### 開発環境
 - docker
