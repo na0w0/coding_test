@@ -16,6 +16,10 @@
 - factory_bot_rails
 - faker
 - rexml
+- rubocop
+- rubocop-rails
+- rubocop-rspec
+- htmlbeautifier
 
 ### yarn
 - bootstrap5
