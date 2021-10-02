@@ -28,17 +28,17 @@
 
 ### 開発環境構築手順
 ```
+# .envファイルをコピー
+cp .env.sample .env
+
 # コンテナをビルド
 docker-compose build
 
 # bundle installを実行
 docker-compose run web bundle install
 
-# yarn installを実行
-docker-compose run web yarn install
-
-# データベースを作成
-docker-compose run web rails db:create
+# webpack installを実行
+docker-compose run web webpacker:install
 
 # マイグレーションを実行
 docker-compose run web rails db:migrate
