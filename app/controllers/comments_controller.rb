@@ -5,9 +5,9 @@ class CommentsController < ApplicationController
     @comment = @post.comments.new(comment_params)
     @comment.user_id = current_user.id
     if @comment.save
-      redirect_back(fallback_location: root_path, success: 'コメントを追加しました。')
+      redirect_to user_post_path(id: @post.id, user_id: @post.user.id), success: 'コメントを追加しました。'
     else
-      redirect_back(fallback_location: root_path, danger: 'コメントの追加に失敗しました。')
+      redirect_to user_post_path(@post), danger: 'コメントの追加に失敗しました。'
     end
   end
 
@@ -22,14 +22,15 @@ class CommentsController < ApplicationController
     if @comment.update(comment_params)
       redirect_to user_post_path(@post), success: 'コメントを更新しました。'
     else
-      redirect_back(fallback_location: root_path, danger: 'コメントの更新に失敗しました。')
+      redirect_to user_post_path(@post), danger: 'コメントの更新に失敗しました。'
     end
   end
 
   def destroy
-    @comment = current_user.comments.find(params[:id])
+    @post = current_user_post
+    @comment = @post.comments.find(params[:id])
     @comment.destroy!
-    redirect_back(fallback_location: root_path, success: 'コメントを削除しました。')
+    redirect_to user_post_path(@post), success: 'コメントを削除しました。'
   end
 
   private
