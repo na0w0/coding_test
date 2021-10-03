@@ -16,6 +16,10 @@ RSpec.describe 'Comments', type: :request do
         post post_comments_path(post_id: new_post.id, comment: comment_params)
         expect(response).to have_http_status(302)
       end
+      it '記事の詳細ページに遷移すること' do
+        post post_comments_path(post_id: new_post.id, comment: comment_params)
+        expect(response).to redirect_to user_post_path(id: new_comment.post.id, user_id: new_comment.post.user.id)
+      end
     end
   end
 
