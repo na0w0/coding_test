@@ -11,14 +11,14 @@ RSpec.describe 'Mypage', type: :request do
 
       it 'ステータスコード200が返ってくること' do
         get mypage_index_path
-        expect(response).to have_http_status(200)
+        expect(response).to have_http_status(:ok)
       end
     end
 
     context 'ユーザーがログインしていない場合' do
       it 'ステータスコード302が返ってくること' do
         get mypage_index_path
-        expect(response).to have_http_status(302)
+        expect(response).to have_http_status(:found)
       end
     end
   end
