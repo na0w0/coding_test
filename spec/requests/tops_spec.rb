@@ -11,14 +11,14 @@ RSpec.describe 'Tops', type: :request do
 
       it 'ステータスコード200が返ってくる' do
         get root_path
-        expect(response).to have_http_status(200)
+        expect(response).to have_http_status(:ok)
       end
     end
 
     context 'ユーザーがログインしていない場合' do
       it 'ステータスコード200が返ってくる' do
         get root_path
-        expect(response).to have_http_status(200)
+        expect(response).to have_http_status(:ok)
       end
     end
   end
