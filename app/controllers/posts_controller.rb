@@ -8,7 +8,7 @@ class PostsController < ApplicationController
     @posts = Post.where(user_id: @user.id)
   end
 
-  def new 
+  def new
     @post = current_user.posts.build
   end
 
@@ -47,6 +47,7 @@ class PostsController < ApplicationController
   end
 
   private
+
   def post_params
     params.require(:post).permit(:user_id, :title, :content)
   end
