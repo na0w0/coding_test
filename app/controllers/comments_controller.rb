@@ -1,7 +1,7 @@
 class CommentsController < ApplicationController
   before_action :authenticate_user!
   def create
-    @post = current_user_post
+    @post = Post.find(params[:post_id])
     @comment = @post.comments.new(comment_params)
     @comment.user_id = current_user.id
     if @comment.save
@@ -12,25 +12,40 @@ class CommentsController < ApplicationController
   end
 
   def edit
-    @post = current_user_post
-    @comment = @post.comments.find(params[:id])
+    if current_user_post
+      @post = current_user_post
+      @comment = @post.comments.find(params[:id])
+    else
+      @comment = current_user.comments.find(params[:id])
+      @post = @comment.post
+    end
   end
 
   def update
-    @post = current_user_post
-    @comment = @post.comments.find(params[:id])
-    if @comment.update(comment_params)
-      redirect_to user_post_path(@post), success: 'コメントを更新しました。'
+    if current_user_post
+      @post = current_user_post
+      @comment = @post.comments.find(params[:id])
     else
-      redirect_to user_post_path(@post), danger: 'コメントの更新に失敗しました。'
+      @comment = current_user.comments.find(params[:id])
+      @post = @comment.post
+    end
+    if @comment.update(comment_params)
+      redirect_to user_post_path(id: @post.id, user_id: @post.user.id), success: 'コメントを更新しました。'
+    else
+      redirect_to user_post_path(id: @post.id, user_id: @post.user.id), danger: 'コメントの更新に失敗しました。'
     end
   end
 
   def destroy
-    @post = current_user_post
-    @comment = @post.comments.find(params[:id])
+    if current_user_post
+      @post = current_user_post
+      @comment = @post.comments.find(params[:id])
+    else
+      @comment = current_user.comments.find(params[:id])
+      @post = @comment.post
+    end
     @comment.destroy!
-    redirect_to user_post_path(@post), success: 'コメントを削除しました。'
+    redirect_to user_post_path(id: @post.id, user_id: @post.user.id), success: 'コメントを削除しました。'
   end
 
   private
@@ -40,6 +55,6 @@ class CommentsController < ApplicationController
   end
 
   def current_user_post
-    current_user.posts.find(params[:post_id])
+    current_user.posts.find_by_id(params[:post_id])
   end
 end
