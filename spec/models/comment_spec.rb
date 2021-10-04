@@ -3,10 +3,9 @@ require 'rails_helper'
 RSpec.describe Comment, type: :model do
   describe 'バリデーションのテスト' do
     let(:user) { create(:user) }
+    let(:test_comment) { comment }
     let!(:post) { build(:post, user_id: user.id) }
     let!(:comment) { build(:comment, post_id: post.id, user_id: user.id) }
-
-    let(:test_comment) { comment }
 
     context 'contentカラム' do
       it '空欄でないこと' do
