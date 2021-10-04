@@ -144,3 +144,8 @@ RSpec/MultipleExpectations:
 
 RSpec/NestedGroups:
   Max: 5
+
+############ Metrics ############
+Metrics/BlockLength:
+  Exclude:
+    - 'spec/**/*'

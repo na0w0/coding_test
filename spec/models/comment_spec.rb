@@ -3,17 +3,14 @@ require 'rails_helper'
 RSpec.describe Comment, type: :model do
   describe 'バリデーションのテスト' do
     let(:user) { create(:user) }
-    let(:other_user) { create(:user) }
-    let!(:post) { build(:post, user_id: user.id) }
-    let!(:comment) { build(:comment, post_id: post.id, user_id: other_user.id) }
-
-    subject { test_comment.valid? }
     let(:test_comment) { comment }
+    let!(:post) { build(:post, user_id: user.id) }
+    let!(:comment) { build(:comment, post_id: post.id, user_id: user.id) }
 
     context 'contentカラム' do
       it '空欄でないこと' do
         test_comment.content = ''
-        is_expected.to eq false
+        expect(test_comment).to be_invalid
       end
     end
 
