@@ -12,9 +12,9 @@ RSpec.describe 'Posts', type: :request do
         login_as user
       end
 
-      it '自分の記事の一覧ページを閲覧しようとするとmypageにリダイレクトする' do
+      it '自分の記事の一覧ページを見ることができる' do
         get user_posts_path(user_id: user.id)
-        expect(response).to redirect_to(mypage_index_path)
+        expect(response).to have_http_status(200)
       end
 
       it '別ユーザーの記事一覧を見ることができる' do

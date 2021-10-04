@@ -3,9 +3,7 @@ class PostsController < ApplicationController
 
   def index
     @user = User.find(params[:user_id])
-    redirect_to :mypage_index if user_signed_in? && current_user.id == @user.id
-
-    @posts = Post.where(user_id: @user.id)
+    @posts = @user.posts.order(created_at: :desc)
   end
 
   def new
@@ -13,11 +11,11 @@ class PostsController < ApplicationController
   end
 
   def create
-    @post = Post.new(post_params)
+    @post = current_user.posts.build(post_params)
     if @post.save
       redirect_to :mypage_index, success: '記事を作成しました。'
     else
-      render action: 'new'
+      render action: :new
     end
   end
 
@@ -28,11 +26,11 @@ class PostsController < ApplicationController
   end
 
   def edit
-    @post = Post.find(params[:id])
+    @post = current_user.posts.find(params[:id])
   end
 
   def update
-    @post = Post.find(params[:id])
+    @post = current_user.posts.find(params[:id])
     if @post.update(post_params)
       redirect_to :mypage_index, success: '記事を更新しました。'
     else
@@ -41,7 +39,7 @@ class PostsController < ApplicationController
   end
 
   def destroy
-    @post = Post.find(params[:id])
+    @post = current_user.posts.find(params[:id])
     @post.destroy!
     redirect_to :mypage_index, success: '記事を削除しました。'
   end
@@ -49,6 +47,6 @@ class PostsController < ApplicationController
   private
 
   def post_params
-    params.require(:post).permit(:user_id, :title, :content)
+    params.require(:post).permit(:title, :content)
   end
 end
