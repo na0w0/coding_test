@@ -13,3 +13,20 @@
  *= require_tree .
  *= require_self
  */
+
+.error-section {
+  display: flex;
+  align-items: center;
+  height: calc(100vh - 136px - 60px);
+}
+
+.error-content {
+  width: 100%;
+  max-width: 350px;
+  padding: 15px;
+  margin: auto;
+}
+
+.error-icon {
+  text-align: center;
+}
