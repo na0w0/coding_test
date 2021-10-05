@@ -47,10 +47,10 @@
     <div class='card py-2 my-1'>
       <%= form_with model: [@post, @comment] do |f| %>
         <div class="card-body">
-          <label for="inputComment" class="col-sm-2 col-form-label">コメント</label>
+          <label class="col-sm-2 col-form-label">コメント</label>
           <div class='row'>
             <div class="col">
-              <%= f.text_field :content, required: true, class: 'form-control', id: 'inputComment' %>
+              <%= f.text_field :content, required: true, class: 'form-control' %>
             </div>
             <div class='col-2'>
               <%= f.submit 'コメントする', class: 'btn btn-primary' %>
