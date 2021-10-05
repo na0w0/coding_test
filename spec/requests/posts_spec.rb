@@ -14,29 +14,31 @@ RSpec.describe 'Posts', type: :request do
 
       it '自分の記事の一覧ページを見ることができる' do
         get user_posts_path(user_id: user.id)
-        expect(response).to have_http_status(200)
+        expect(response).to have_http_status(:ok)
       end
 
       it '別ユーザーの記事一覧を見ることができる' do
         get user_posts_path(user_id: other_user.id)
-        expect(response).to have_http_status(200)
+        expect(response).to have_http_status(:ok)
       end
 
-      context '存在しないユーザーの記事一覧ページを閲覧しようとした時' do
-        subject { -> { get user_posts_path(user_id: 99) } }
-        it { is_expected.to raise_error ActiveRecord::RecordNotFound }
+      it '存在しないユーザーの記事一覧ページを閲覧しようとした時' do
+        expect {
+          get user_posts_path(user_id: 99)
+        }.to raise_error(ActiveRecord::RecordNotFound)
       end
     end
 
     context 'ユーザーがログインしていない場合' do
       it '別ユーザーの記事一覧を見ることができる' do
         get user_posts_path(user_id: other_user.id)
-        expect(response).to have_http_status(200)
+        expect(response).to have_http_status(:ok)
       end
 
-      context '存在しないユーザーの記事一覧ページを閲覧しようとした時' do
-        subject { -> { get user_posts_path(user_id: 99) } }
-        it { is_expected.to raise_error ActiveRecord::RecordNotFound }
+      it '存在しないユーザーの記事一覧ページを閲覧しようとした時' do
+        expect {
+          get user_posts_path(user_id: 99)
+        }.to raise_error(ActiveRecord::RecordNotFound)
       end
     end
   end
@@ -46,16 +48,17 @@ RSpec.describe 'Posts', type: :request do
       before do
         login_as user
       end
+
       it '記事を作成するページを見ることができる' do
         get new_post_path
-        expect(response).to have_http_status(200)
+        expect(response).to have_http_status(:ok)
       end
     end
 
     context 'ユーザーがログインしていない場合' do
       it '記事を作成するページを見ることができない' do
         get new_post_path
-        expect(response).to have_http_status(302)
+        expect(response).to have_http_status(:found)
       end
     end
   end
@@ -69,7 +72,7 @@ RSpec.describe 'Posts', type: :request do
       context 'パラメーターが妥当な場合' do
         it 'リクエストが成功すること' do
           post posts_path(post: post_params)
-          expect(response).to have_http_status(302)
+          expect(response).to have_http_status(:found)
         end
 
         it 'createが成功すること' do
@@ -78,7 +81,7 @@ RSpec.describe 'Posts', type: :request do
           end.to change(Post, :count).by 1
         end
 
-        it 'リクエストが成功すること' do
+        it 'マイページにリダイレクトすること' do
           post posts_path(post: post_params)
           expect(response).to redirect_to :mypage_index
         end
@@ -94,14 +97,14 @@ RSpec.describe 'Posts', type: :request do
 
       it 'リクエストが成功すること' do
         get user_post_path(user_id: new_post.user.id, id: new_post.id)
-        expect(response).to have_http_status(200)
+        expect(response).to have_http_status(:ok)
       end
     end
 
     describe 'ユーザーがログインしていない場合' do
       it 'リクエストが成功すること' do
         get user_post_path(user_id: new_post.user.id, id: new_post.id)
-        expect(response).to have_http_status(200)
+        expect(response).to have_http_status(:ok)
       end
     end
   end
@@ -111,16 +114,17 @@ RSpec.describe 'Posts', type: :request do
       before do
         login_as user
       end
+
       it '記事を編集するページを見ることができる' do
         get edit_post_path(new_post.id)
-        expect(response).to have_http_status(200)
+        expect(response).to have_http_status(:ok)
       end
     end
 
     context 'ユーザーがログインしていない場合' do
       it '記事を編集するページを見ることができない' do
         get edit_post_path(new_post.id)
-        expect(response).to have_http_status(302)
+        expect(response).to have_http_status(:found)
       end
     end
   end
@@ -134,7 +138,7 @@ RSpec.describe 'Posts', type: :request do
       it 'リクエストが成功すること' do
         post_params[:title] = 'sample'
         put post_path(id: new_post.id, post: post_params)
-        expect(response).to have_http_status(302)
+        expect(response).to have_http_status(:found)
       end
     end
 
@@ -145,13 +149,7 @@ RSpec.describe 'Posts', type: :request do
           put post_path(id: new_post.id, post: post_params)
           expect(response).to redirect_to new_user_session_path
         end
-
-        it 'editテンプレートで表示されること' do
-          post_params[:title] = 'sample'
-          put post_path(id: new_post.id, post: post_params)
-          expect(response).to redirect_to new_user_session_path
-        end  
-      end  
+      end
     end
   end
 
@@ -163,7 +161,7 @@ RSpec.describe 'Posts', type: :request do
 
       it 'リクエストが成功すること' do
         delete post_path(id: new_post.id)
-        expect(response).to have_http_status(302)
+        expect(response).to have_http_status(:found)
       end
 
       it '記事が削除されること' do
