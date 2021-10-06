@@ -56,6 +56,6 @@ class PostsController < ApplicationController
   end
 
   def comment_contributor?(comment)
-    user_signed_in? && current_user.id == comment.user.id || current_user.id == comment.post.user.id
+    user_signed_in? && current_user.id == comment.user.id || user_signed_in? && current_user.id == comment.post.user.id
   end
 end
