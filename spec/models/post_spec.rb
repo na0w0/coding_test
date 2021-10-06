@@ -3,22 +3,20 @@ require 'rails_helper'
 RSpec.describe Post, type: :model do
   describe 'バリデーションのテスト' do
     let(:user) { create(:user) }
-    let!(:post) { build(:post, user_id: user.id) }
-
-    subject { test_post.valid? }
     let(:test_post) { post }
+    let!(:post) { build(:post, user_id: user.id) }
 
     context 'titleカラム' do
       it '空欄でないこと' do
         test_post.title = ''
-        is_expected.to eq false
+        expect(test_post).to be_invalid
       end
     end
 
     context 'contentカラム' do
       it '空欄でないこと' do
         test_post.content = ''
-        is_expected.to eq false
+        expect(test_post).to be_invalid
       end
     end
 

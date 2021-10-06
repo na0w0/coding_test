@@ -1,12 +1,11 @@
-<div>
-  <% @user_id = @post.user_id %>
-  <%= f.hidden_field :user_id, required: true %>
-</div>
-<div class="mb-3">
-  <%= f.label :title, 'タイトル', class: 'required form-label', for: 'form-title' %>
-  <%= f.text_field :title, required: true, class: 'form-control', id: 'form-title' %>
-</div>
-<div class="mb-3">
-  <%= f.label :content, 'テキスト', class: 'required form-label', for: 'form-title' %>
-  <%= f.text_area :content, required: true, class: 'form-control', id: 'form-content', style: 'height: 30vh' %>
-</div>
+<%= form_with model: @post do |f| %>
+  <div class="mb-3">
+    <%= f.label :title, 'タイトル', class: 'required form-label', for: 'form-title' %>
+    <%= f.text_field :title, required: true, class: 'form-control', id: 'form-title' %>
+  </div>
+  <div class="mb-3">
+    <%= f.label :content, 'テキスト', class: 'required form-label', for: 'form-title' %>
+    <%= f.text_area :content, required: true, class: 'form-control', id: 'form-content', style: 'height: 30vh' %>
+  </div>
+  <%= f.submit '記事を作成', class: 'btn btn-primary' %>
+<% end %>

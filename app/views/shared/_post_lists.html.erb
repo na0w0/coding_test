@@ -2,8 +2,6 @@
   <% if posts.present? %>
     <%= yield :lists %>
   <% else %>
-  <tr>
-    <td>記事がありません</td>
-  </tr>
+    <p>記事がありません</p>
   <% end %>
 </div>

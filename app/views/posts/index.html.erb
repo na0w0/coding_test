@@ -6,11 +6,11 @@
 </div>
 <%= content_for :lists do %>
   <% @posts.each do |post| %>
-    <div class='col-md6'>
+    <div class='col-md-6'>
       <div class='row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative'>
         <div class='col p-4 d-flex flex-column position-static'>
           <h3 class='mb-0'><%= link_to post.title, user_post_path(id: post, user_id: post.user.id) %></h3>
-          <div class='mb-1 text-muted'><%= post.created_at.strftime('%Y/%m/%d') %></div>
+          <div class='mb-1 text-muted'><%= l(post.created_at.to_date) %></div>
           <p class='post-user'>
             投稿者：
             <% if user_signed_in? && current_user.id == post.user.id %>
