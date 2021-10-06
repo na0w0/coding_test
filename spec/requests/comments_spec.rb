@@ -112,7 +112,7 @@ RSpec.describe 'Comments', type: :request do
 
       it 'ログインページへ遷移されること' do
         put post_comment_path(post_id: new_comment.post.id, id: new_comment.id, comment: comment_params)
-        expect(response).to redirect_to :new_user_session
+        expect(response).to redirect_to new_user_session_path
       end
     end
 

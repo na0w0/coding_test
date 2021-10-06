@@ -14,7 +14,7 @@ class PostsController < ApplicationController
   def create
     @post = current_user.posts.build(post_params)
     if @post.save
-      redirect_to :mypage_index, success: '記事を作成しました。'
+      redirect_to mypage_index_path, success: '記事を作成しました。'
     else
       render action: :new
     end
@@ -33,7 +33,7 @@ class PostsController < ApplicationController
   def update
     @post = current_user.posts.find(params[:id])
     if @post.update(post_params)
-      redirect_to :mypage_index, success: '記事を更新しました。'
+      redirect_to mypage_index_path, success: '記事を更新しました。'
     else
       render action: :edit
     end
@@ -42,7 +42,7 @@ class PostsController < ApplicationController
   def destroy
     @post = current_user.posts.find(params[:id])
     @post.destroy!
-    redirect_to :mypage_index, success: '記事を削除しました。'
+    redirect_to mypage_index_path, success: '記事を削除しました。'
   end
 
   private
