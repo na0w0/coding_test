@@ -77,7 +77,7 @@ RSpec.describe 'Posts', type: :request do
 
         it 'マイページにリダイレクトすること' do
           post posts_path(post: post_params)
-          expect(response).to redirect_to :mypage_index
+          expect(response).to redirect_to mypage_index_path
         end
       end
     end
