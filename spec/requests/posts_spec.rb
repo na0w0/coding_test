@@ -107,6 +107,17 @@ RSpec.describe 'Posts', type: :request do
       end
     end
 
+    context '異なるログインユーザーの場合' do
+      before do
+        login_as other_user
+      end
+      it '記事を編集するページを見ることができない', :skip_before_action do
+        expect {
+          get edit_post_path(new_post.id)
+        }.to raise_error(ActiveRecord::RecordNotFound)
+      end
+    end
+
     context 'ユーザーがログインしていない場合' do
       it '記事を編集するページを見ることができない', :skip_before_action do
         get edit_post_path(new_post.id)
@@ -127,6 +138,17 @@ RSpec.describe 'Posts', type: :request do
       end
     end
 
+    context '異なるログインユーザーの場合' do
+      before do
+        login_as other_user
+      end
+      it 'リクエストが失敗すること', :skip_before_action do
+        expect {
+          put post_path(id: new_post.id, post: post_params)
+        }.to raise_error(ActiveRecord::RecordNotFound)
+      end
+    end
+
     context 'ユーザーがログインしていない場合' do
       it 'ログインページに遷移すること', :skip_before_action do
         put post_path(id: new_post.id, post: post_params)
@@ -141,11 +163,22 @@ RSpec.describe 'Posts', type: :request do
         delete post_path(id: new_post.id)
         expect(response).to have_http_status(:found)
       end
-
+  
       it '記事が削除されること' do
         expect do
           delete post_path(id: new_post.id)
         end.to change(Post, :count).by(-1)
+      end
+    end
+
+    context '異なるログインユーザーの場合' do
+      before do
+        login_as other_user
+      end
+      it 'リクエストが失敗すること', :skip_before_action do
+        expect {
+          delete post_path(id: new_post.id)
+        }.to raise_error(ActiveRecord::RecordNotFound)
       end
     end
   end
