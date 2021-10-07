@@ -5,7 +5,7 @@
   </div>
   <div class="mb-3">
     <%= f.label :content, 'テキスト', class: 'required form-label', for: 'form-title' %>
-    <%= f.text_area :content, required: true, class: 'form-control', id: 'form-content', style: 'height: 30vh' %>
+    <%= f.text_area :content, required: true, class: 'form-control text-area-height', id: 'form-content' %>
   </div>
   <%= f.submit @submit, class: 'btn btn-primary' %>
 <% end %>
