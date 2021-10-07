@@ -4,13 +4,10 @@ RSpec.describe User, type: :model do
   describe 'バリデーションのテスト' do
     let(:user) { create(:user) }
 
-    subject { test_user.valid? }
-    let(:test_user) { user }
-
     context 'nameカラム' do
       it '空欄でないこと' do
-        test_user.name = ''
-        is_expected.to eq false
+        user.name = ''
+        expect(user).to be_invalid
       end
     end
   end

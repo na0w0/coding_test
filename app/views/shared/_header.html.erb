@@ -30,7 +30,7 @@
     </div>
   </nav>
   <% flash.each do |name, msg| %>
-    <div class='alert alert-<%= bootstrap_alert(name) %>'>
+    <div class='alert alert-<%= convert_flash_type(name) %>'>
       <%= msg.html_safe %>
     </div>
   <% end %>
