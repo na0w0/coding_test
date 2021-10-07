@@ -9,6 +9,7 @@ class PostsController < ApplicationController
 
   def new
     @post = current_user.posts.build
+    @submit = '記事を作成'
   end
 
   def create
@@ -28,6 +29,7 @@ class PostsController < ApplicationController
 
   def edit
     @post = current_user.posts.find(params[:id])
+    @submit = '記事を更新'
   end
 
   def update
