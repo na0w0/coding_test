@@ -14,12 +14,14 @@
  *= require_self
  */
 
+.form-section,
 .error-section {
   display: flex;
   align-items: center;
   height: calc(100vh - 136px - 60px);
 }
 
+.form-content,
 .error-content {
   width: 100%;
   max-width: 350px;
@@ -27,6 +29,7 @@
   margin: auto;
 }
 
+.form-icon,
 .error-icon {
   text-align: center;
 }
