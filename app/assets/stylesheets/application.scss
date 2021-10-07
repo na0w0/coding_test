@@ -39,3 +39,10 @@
   bottom: 0;
   width: 100%;
 }
+
+.main {
+  min-height: 100vh;
+  position: relative;
+  padding-bottom: 140px;
+  box-sizing: border-box;
+}
