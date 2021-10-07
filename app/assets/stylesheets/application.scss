@@ -33,3 +33,20 @@
 .error-icon {
   text-align: center;
 }
+
+.footer-section {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
+
+.main {
+  min-height: 100vh;
+  position: relative;
+  padding-bottom: 140px;
+  box-sizing: border-box;
+}
+
+.text-area-height {
+  height: 30vh;
+}
