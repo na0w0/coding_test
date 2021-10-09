@@ -8,7 +8,7 @@
       <% if user_signed_in? && current_user.id == @post.user.id %>
         <%= link_to @post.user.name, :mypage_index %>
       <% else %>
-        <%= link_to @post.user.name, user_posts_path(user_id: @post.user.id) %>
+        <%= link_to @post.user.name, posts_path(user_id: @post.user.id) %>
       <% end %>
     </p>
 
@@ -31,7 +31,7 @@
           <% if post_contributor? %>
             <%= link_to comment.user.name, :mypage_index %>
           <% else %>
-            <%= link_to comment.user.name, user_posts_path(user_id: comment.user.id) %>
+            <%= link_to comment.user.name, posts_path(user_id: comment.user.id) %>
           <% end %>
         </p>
         <% if comment_contributor?(comment) %>

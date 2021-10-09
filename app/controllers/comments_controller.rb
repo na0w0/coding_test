@@ -5,9 +5,9 @@ class CommentsController < ApplicationController
     @comment = @post.comments.new(comment_params)
     @comment.user_id = current_user.id
     if @comment.save
-      redirect_to user_post_path(id: @post.id, user_id: @post.user.id), success: 'コメントを追加しました。'
+      redirect_to post_path(@post), success: 'コメントを追加しました。'
     else
-      redirect_to user_post_path(@post), danger: 'コメントの追加に失敗しました。'
+      redirect_to post_path(@post), danger: 'コメントの追加に失敗しました。'
     end
   end
 
@@ -30,9 +30,9 @@ class CommentsController < ApplicationController
       @post = @comment.post
     end
     if @comment.update(comment_params)
-      redirect_to user_post_path(id: @post.id, user_id: @post.user.id), success: 'コメントを更新しました。'
+      redirect_to post_path(@post), success: 'コメントを更新しました。'
     else
-      redirect_to user_post_path(id: @post.id, user_id: @post.user.id), danger: 'コメントの更新に失敗しました。'
+      redirect_to post_path(@post), danger: 'コメントの更新に失敗しました。'
     end
   end
 
@@ -45,7 +45,7 @@ class CommentsController < ApplicationController
       @post = @comment.post
     end
     @comment.destroy!
-    redirect_to user_post_path(id: @post.id, user_id: @post.user.id), success: 'コメントを削除しました。'
+    redirect_to post_path(@post), success: 'コメントを削除しました。'
   end
 
   private

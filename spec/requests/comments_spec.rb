@@ -22,7 +22,7 @@ RSpec.describe 'Comments', type: :request do
 
       it '記事の詳細ページに遷移すること' do
         post post_comments_path(post_id: new_post.id, comment: comment_params)
-        expect(response).to redirect_to user_post_path(id: new_comment.post.id, user_id: new_comment.post.user.id)
+        expect(response).to redirect_to post_path(new_comment.post)
       end
     end
 
@@ -38,7 +38,7 @@ RSpec.describe 'Comments', type: :request do
 
       it '記事の詳細ページに遷移すること' do
         post post_comments_path(post_id: new_post.id, comment: comment_params)
-        expect(response).to redirect_to user_post_path(id: new_comment.post.id, user_id: new_comment.post.user.id)
+        expect(response).to redirect_to post_path(new_comment.post)
       end
     end
   end
@@ -94,7 +94,7 @@ RSpec.describe 'Comments', type: :request do
       it '記事の詳細ページに遷移すること' do
         comment_params[:content] = 'sample'
         put post_comment_path(id: new_comment.id, post_id: new_comment.post_id, comment: comment_params)
-        expect(response).to redirect_to user_post_path(id: new_comment.post.id, user_id: new_comment.user.id)
+        expect(response).to redirect_to post_path(new_comment.post)
       end
 
       it '自分の記事の異なるユーザーのコメントを更新できること' do
