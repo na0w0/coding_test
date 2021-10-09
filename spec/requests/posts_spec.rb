@@ -15,31 +15,31 @@ RSpec.describe 'Posts', type: :request do
   describe 'GET #index' do
     context 'ログインユーザーの場合' do
       it '自分の記事の一覧ページを見ることができる' do
-        get user_posts_path(user_id: user.id)
+        get posts_path(user_id: user.id)
         expect(response).to have_http_status(:ok)
       end
 
       it '別ユーザーの記事一覧を見ることができる' do
-        get user_posts_path(user_id: other_user.id)
+        get posts_path(user_id: other_user.id)
         expect(response).to have_http_status(:ok)
       end
 
       it '存在しないユーザーの記事一覧ページを閲覧しようとした時' do
         expect {
-          get user_posts_path(user_id: 99)
+          get posts_path(user_id: 99)
         }.to raise_error(ActiveRecord::RecordNotFound)
       end
     end
 
     context 'ユーザーがログインしていない場合' do
       it '別ユーザーの記事一覧を見ることができる' do
-        get user_posts_path(user_id: other_user.id)
+        get posts_path(user_id: other_user.id)
         expect(response).to have_http_status(:ok)
       end
 
       it '存在しないユーザーの記事一覧ページを閲覧しようとした時' do
         expect {
-          get user_posts_path(user_id: 99)
+          get posts_path(user_id: 99)
         }.to raise_error(ActiveRecord::RecordNotFound)
       end
     end
@@ -86,14 +86,14 @@ RSpec.describe 'Posts', type: :request do
   describe 'GET #show' do
     context 'ログインユーザーの場合' do
       it 'リクエストが成功すること' do
-        get user_post_path(user_id: new_post.user.id, id: new_post.id)
+        get post_path(new_post)
         expect(response).to have_http_status(:ok)
       end
     end
 
     describe 'ユーザーがログインしていない場合' do
       it 'リクエストが成功すること', :skip_before_action do
-        get user_post_path(user_id: new_post.user.id, id: new_post.id)
+        get post_path(new_post)
         expect(response).to have_http_status(:ok)
       end
     end
@@ -111,6 +111,7 @@ RSpec.describe 'Posts', type: :request do
       before do
         login_as other_user
       end
+
       it '記事を編集するページを見ることができない', :skip_before_action do
         expect {
           get edit_post_path(new_post.id)
@@ -142,6 +143,7 @@ RSpec.describe 'Posts', type: :request do
       before do
         login_as other_user
       end
+
       it 'リクエストが失敗すること', :skip_before_action do
         expect {
           put post_path(id: new_post.id, post: post_params)
@@ -163,7 +165,7 @@ RSpec.describe 'Posts', type: :request do
         delete post_path(id: new_post.id)
         expect(response).to have_http_status(:found)
       end
-  
+
       it '記事が削除されること' do
         expect do
           delete post_path(id: new_post.id)
@@ -175,6 +177,7 @@ RSpec.describe 'Posts', type: :request do
       before do
         login_as other_user
       end
+
       it 'リクエストが失敗すること', :skip_before_action do
         expect {
           delete post_path(id: new_post.id)
