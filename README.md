@@ -20,6 +20,7 @@
 - rubocop-rails
 - rubocop-rspec
 - htmlbeautifier
+- letter_opener
 
 ### yarn
 - bootstrap5

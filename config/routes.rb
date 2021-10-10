@@ -4,8 +4,13 @@ Rails.application.routes.draw do
   root 'top#index'
   devise_for :users, controllers: {
     sessions: 'users/sessions',
-    registrations: 'users/registrations'
+    registrations: 'users/registrations',
+    confirmations: 'users/confirmations'
   }
+
+  devise_scope :user do
+    patch 'users/confirmation', to: 'users/confirmations#confirm'
+  end
 
   resources :posts do
     resources :comments, only: [:create, :edit, :update, :destroy]

@@ -1,0 +1,18 @@
+<h2>本登録をするためにパスワードを設定してください</h2>
+
+<%= form_for(resource, as: resource_name, url: user_confirmation_path(resource_name), html: { method: :patch }) do |f| %>
+  <%= render "users/shared/error_messages", resource: resource %>
+
+  <div class="field">
+    <%= hidden_field_tag  :confirmation_token, params[:confirmation_token] %>
+    <%= f.text_field :name, autofocus: true, autocomplete: 'name', placeholder: 'ニックネーム', class: 'form-control' %>
+    <%= f.password_field :password, autocomplete: 'new-password', placeholder: "パスワード（#{@minimum_password_length}文字以上）", class: 'form-control' %>
+    <%= f.password_field :password_confirmation, autocomplete: 'new-password', placeholder: 'パスワード（確認用）', class: 'form-control' %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "Resend confirmation instructions" %>
+  </div>
+<% end %>
+
+<%= render "users/shared/links" %>
