@@ -8,4 +8,12 @@ class User < ApplicationRecord
   has_many :comments, dependent: :destroy
 
   validates :name, presence: true, uniqueness: true
+
+  def password_required?
+    super if confirmed?
+  end
+
+  def confirmed?
+    !!confirmed_at
+  end
 end
